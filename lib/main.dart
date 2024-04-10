@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:haupcar/hamberger_menu.dart';
 
 void main() => runApp(const AppHaupCar());
 
@@ -25,30 +26,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('Home'),
       ),
-      drawer: const NavigationDrawer(
-        children: [
-          Padding(
-            padding: EdgeInsets.all(10),
-          ),
-          Column(
-            children: [
-              Text(
-                'Language/ภาษา',
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Divider(
-                height: 1.5,
-              ),
-              TextButton(
-                onPressed: null,
-                child: Text('ไทย'),
-              ),
-            ],
-          ),
-        ],
-      ),
+      drawer: hambergerMenu(),
       body: const Center(
         child: Text('data'),
       ),
