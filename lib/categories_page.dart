@@ -43,15 +43,19 @@ class _CategoriesPageState extends State<CategoriesPage> {
           title: Text(widget.barTitle),
         ),
         body: (_apiCalling)
-            ? const Center(child: CircularProgressIndicator())
+            ? const Center(
+                child: CircularProgressIndicator(
+                color: Colors.blueGrey,
+              ))
             : GridView.builder(
                 itemCount: itemList.length,
                 padding: const EdgeInsets.all(10),
                 gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 200,
-                    childAspectRatio: 3 / 4,
-                    crossAxisSpacing: 5,
-                    mainAxisSpacing: 5),
+                  maxCrossAxisExtent: 200,
+                  childAspectRatio: 3 / 4,
+                  crossAxisSpacing: 5,
+                  mainAxisSpacing: 5,
+                ),
                 itemBuilder: (context, index) => ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: buildGridTile(index))),
@@ -70,7 +74,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
               '\$${fmt.format(itemList[index]['price'])}',
             ),
             trailing: const Icon(Icons.arrow_forward_ios,
-                size: 32, color: Colors.white),
+                size: 32, color: Color.fromARGB(150, 255, 255, 255)),
           ),
           child: Image.network(
             itemList[index]['thumbnail'],

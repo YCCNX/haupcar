@@ -12,8 +12,11 @@ class AppHaupCar extends StatelessWidget {
   const AppHaupCar({super.key});
 
   @override
-  Widget build(BuildContext context) => const MaterialApp(
-        home: HomePage(),
+  Widget build(BuildContext context) => MaterialApp(
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
+        ),
+        home: const HomePage(),
       );
 }
 
@@ -73,7 +76,10 @@ class _HomePageState extends State<HomePage> {
         body: Container(
           padding: const EdgeInsets.all(15),
           child: (_apiCalling
-              ? const Center(child: CircularProgressIndicator())
+              ? const Center(
+                  child: CircularProgressIndicator(
+                  color: Colors.blueGrey,
+                ))
               : builListView()),
         ),
       );
