@@ -25,7 +25,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<List<String>> futureCategories;
   List<String> categoriesList = [];
   var _apiCalling = true;
   //ข้อมูลไม่ยอมแสดงผล
