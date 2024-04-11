@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'api.dart';
 
@@ -15,6 +16,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
   late CategoriesApi item;
   var itemList = [];
   var _apiCalling = true;
+  var fmt = NumberFormat.decimalPattern();
 
   @override
   void initState() {
@@ -58,13 +60,15 @@ class _CategoriesPageState extends State<CategoriesPage> {
   Widget buildGridTile(int index) => InkWell(
       child: GridTile(
           footer: GridTileBar(
-            backgroundColor: Colors.black54,
+            backgroundColor: const Color.fromARGB(150, 96, 125, 139),
             title: Text(
               itemList[index]['title'],
               textScaler: const TextScaler.linear(1.3),
               maxLines: 1,
             ),
-            subtitle: const Text('฿'),
+            subtitle: Text(
+              '\$${fmt.format(itemList[index]['price'])}',
+            ),
             trailing: const Icon(Icons.arrow_forward_ios,
                 size: 32, color: Colors.white),
           ),
