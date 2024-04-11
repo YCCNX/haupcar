@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:haupcar/categories_page.dart';
 import 'package:haupcar/hamberger_menu.dart';
 import 'package:haupcar/api.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
 
+//Use Flutter:Launch Emulator (Pixel 7 (android-x64)) Test!!
 void main() => runApp(const AppHaupCar());
 
 class AppHaupCar extends StatelessWidget {
@@ -26,22 +28,26 @@ class _HomePageState extends State<HomePage> {
   late Future<List<String>> futureCategories;
   List<String> categoriesList = [];
   var _apiCalling = true;
-
+  //ข้อมูลไม่ยอมแสดงผล
+  //ต้องมีการอัปเดตหลังจากรันแอปถึงจะมีข้อมูลแสดงผล
   @override
   void initState() {
     super.initState();
     getCategories();
-    setState(() {
-      _apiCalling = false;
-      print("");
-      print(categoriesList);
-    });
+    // setState(() {
+
+    //   print("1");
+    //   print(categoriesList);
+    // });
   }
 
   Future<void> getCategories() async {
     var response =
         await http.get(Uri.parse('https://dummyjson.com/products/categories'));
-    categoriesList = catagoriesFromJson(response.body);
+    setState(() {
+      categoriesList = catagoriesFromJson(response.body);
+      _apiCalling = false;
+    });
   }
 
   // @override
@@ -81,9 +87,18 @@ class _HomePageState extends State<HomePage> {
           color: Colors.blueAccent,
         ),
       );
+
   Widget buildListTile(int index) => ListTile(
         contentPadding: const EdgeInsets.only(top: 5, bottom: 5),
         title: Text(categoriesList[index]),
         trailing: const Icon(Icons.arrow_forward),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CategoriesPage(),
+            ),
+          );
+        },
       );
 }
