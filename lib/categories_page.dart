@@ -13,7 +13,7 @@ class CategoriesPage extends StatefulWidget {
 
 class _CategoriesPageState extends State<CategoriesPage> {
   late CategoriesApi item;
-  late Product itemList;
+  var itemList = [];
   var _apiCalling = true;
 
   @override
@@ -27,10 +27,11 @@ class _CategoriesPageState extends State<CategoriesPage> {
         .get(Uri.parse('https://dummyjson.com/products/category/$str'));
     setState(() {
       item = categoriesApiFromJson(response.body);
-      itemList = item.products;
+      List<dynamic> a = item.products as List<dynamic>;
+      for (var p in a) {
+        itemList.add(p);
+      }
       _apiCalling = false;
-
-      print(item.products);
     });
   }
 
@@ -39,9 +40,36 @@ class _CategoriesPageState extends State<CategoriesPage> {
         appBar: AppBar(
           title: Text(widget.barTitle),
         ),
-        body: Container(
-            padding: const EdgeInsets.all(15),
-            alignment: Alignment.topCenter,
-            child: Text('Test')),
+        body: (_apiCalling)
+            ? const Center(child: CircularProgressIndicator())
+            : GridView.builder(
+                itemCount: itemList.length,
+                padding: const EdgeInsets.all(10),
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 200,
+                    childAspectRatio: 3 / 4,
+                    crossAxisSpacing: 5,
+                    mainAxisSpacing: 5),
+                itemBuilder: (context, index) => ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: buildGridTile(index))),
       );
+
+  Widget buildGridTile(int index) => InkWell(
+      child: GridTile(
+          footer: GridTileBar(
+            backgroundColor: Colors.black54,
+            title: Text(
+              itemList[index]['title'],
+              textScaler: const TextScaler.linear(1.3),
+              maxLines: 1,
+            ),
+            subtitle: const Text('฿'),
+            trailing: const Icon(Icons.arrow_forward_ios,
+                size: 32, color: Colors.white),
+          ),
+          child: Image.network(
+            itemList[index]['thumbnail'],
+          )),
+      onTap: () => {});
 }

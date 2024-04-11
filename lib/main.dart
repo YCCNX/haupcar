@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
         itemBuilder: (context, index) => buildListTile(index),
         separatorBuilder: (conter, index) => const Divider(
           thickness: 1,
-          color: Colors.blueAccent,
+          color: Colors.blueGrey,
         ),
       );
 
