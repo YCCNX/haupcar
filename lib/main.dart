@@ -96,7 +96,8 @@ class _HomePageState extends State<HomePage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => CategoriesPage(),
+              builder: (context) =>
+                  CategoriesPage(barTitle: categoriesList[index]),
             ),
           );
         },

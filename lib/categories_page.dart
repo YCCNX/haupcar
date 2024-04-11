@@ -3,7 +3,8 @@ import 'api.dart';
 
 //สร้างโครงไว้ก่อน เดี้นวมาแก้เรื่องการแสดงผลอีกที
 class CategoriesPage extends StatefulWidget {
-  const CategoriesPage({super.key});
+  final String barTitle;
+  const CategoriesPage({required this.barTitle, super.key});
 
   @override
   State<CategoriesPage> createState() => _CategoriesPageState();
@@ -24,7 +25,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text('Categories'),
+          title: Text(widget.barTitle),
         ),
       );
 }
