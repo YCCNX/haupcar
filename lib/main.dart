@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:haupcar/api.dart';
 import 'package:haupcar/hamberger_menu.dart';
+import 'package:haupcar/api.dart';
+import 'dart:async';
+import 'package:http/http.dart' as http;
 
 void main() => runApp(const AppHaupCar());
 
@@ -22,23 +24,40 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late Future<List<String>> futureCategories;
-  var categoriesList = [];
+  List<String> categoriesList = [];
   var _apiCalling = true;
 
   @override
   void initState() {
     super.initState();
-    futureCategories = apiGet();
-
-    futureCategories.then((value) {
-      for (var p in value) {
-        categoriesList.add(p);
-      }
-    });
+    getCategories();
     setState(() {
       _apiCalling = false;
+      print("");
+      print(categoriesList);
     });
   }
+
+  Future<void> getCategories() async {
+    var response =
+        await http.get(Uri.parse('https://dummyjson.com/products/categories'));
+    categoriesList = catagoriesFromJson(response.body);
+  }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   futureCategories = apiGet();
+
+  //   setState(() {
+  //     _apiCalling = false;
+  //     futureCategories.then((value) {
+  //       for (var p in value) {
+  //         categoriesList.add(p);
+  //       }
+  //     });
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) => Scaffold(
