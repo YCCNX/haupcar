@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:haupcar/categories_page.dart';
 import 'package:haupcar/hamberger_menu.dart';
 import 'package:haupcar/api.dart';
+import 'package:haupcar/locale_string.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
+import 'package:get/get.dart';
 
 //Use Flutter:Launch Emulator (Pixel 7 (android-x64)) Test!!
 void main() => runApp(const AppHaupCar());
@@ -12,7 +14,9 @@ class AppHaupCar extends StatelessWidget {
   const AppHaupCar({super.key});
 
   @override
-  Widget build(BuildContext context) => MaterialApp(
+  Widget build(BuildContext context) => GetMaterialApp(
+        translations: LocaleString(),
+        locale: const Locale('US', 'en'),
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
         ),
@@ -70,7 +74,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: const Text('Home'),
+          title: Text('Home'.tr),
         ),
         drawer: hambergerMenu(),
         body: Container(

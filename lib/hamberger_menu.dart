@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'language_button.dart';
+import 'package:get/get.dart';
 
 Widget hambergerMenu() => NavigationDrawer(
       children: [
@@ -8,9 +9,9 @@ Widget hambergerMenu() => NavigationDrawer(
         ),
         Column(
           children: [
-            const Text(
-              'Language/ภาษา',
-              style: TextStyle(
+            Text(
+              'Language'.tr,
+              style: const TextStyle(
                 fontSize: 16,
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -24,11 +25,17 @@ Widget hambergerMenu() => NavigationDrawer(
             ),
             LanguageButton(
               language: 'ไทย',
-              onTap: () {},
+              onTap: () {
+                var locale = const Locale('TH', 'th');
+                Get.updateLocale(locale);
+              },
             ),
             LanguageButton(
               language: 'English',
-              onTap: () {},
+              onTap: () {
+                var locale = const Locale('US', 'en');
+                Get.updateLocale(locale);
+              },
             ),
           ],
         ),
