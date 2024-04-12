@@ -1,6 +1,7 @@
 # haupcar
 
-A new Flutter project.\n
+A new Flutter project.
+
 Use file name 'app-release.apk' to test on android device.
 
 ## Getting Started
