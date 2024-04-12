@@ -7,7 +7,6 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 
-//Use Flutter:Launch Emulator (Pixel 7 (android-x64)) Test!!
 void main() => runApp(const AppHaupCar());
 
 class AppHaupCar extends StatelessWidget {
@@ -34,17 +33,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<String> categoriesList = [];
   var _apiCalling = true;
-  //ข้อมูลไม่ยอมแสดงผล
-  //ต้องมีการอัปเดตหลังจากรันแอปถึงจะมีข้อมูลแสดงผล
+
   @override
   void initState() {
     super.initState();
     getCategories();
-    // setState(() {
-
-    //   print("1");
-    //   print(categoriesList);
-    // });
   }
 
   Future<void> getCategories() async {
@@ -55,21 +48,6 @@ class _HomePageState extends State<HomePage> {
       _apiCalling = false;
     });
   }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   futureCategories = apiGet();
-
-  //   setState(() {
-  //     _apiCalling = false;
-  //     futureCategories.then((value) {
-  //       for (var p in value) {
-  //         categoriesList.add(p);
-  //       }
-  //     });
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -99,8 +77,12 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildListTile(int index) => ListTile(
         contentPadding: const EdgeInsets.only(top: 5, bottom: 5),
-        title: Text(categoriesList[index]),
-        trailing: const Icon(Icons.arrow_forward),
+        title: Text(
+          categoriesList[index],
+        ),
+        trailing: const Icon(
+          Icons.arrow_forward,
+        ),
         onTap: () {
           Navigator.push(
             context,
